@@ -27,11 +27,13 @@ export class UsersService {
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.users;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    const user = this.users.find((item) => item.id === id);
+
+    return user;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
