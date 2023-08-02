@@ -27,6 +27,9 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  /**
+   * O sinal de + faz a transformação automatica para string
+   */
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
