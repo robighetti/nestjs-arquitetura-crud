@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { EntityNotFoundError } from 'src/errors/entity-not-found.error';
 
 @Injectable()
 export class UsersService {
@@ -32,6 +33,10 @@ export class UsersService {
 
   findOne(id: number) {
     const user = this.users.find((item) => item.id === id);
+
+    if (!user) {
+      throw new EntityNotFoundError('User');
+    }
 
     return user;
   }

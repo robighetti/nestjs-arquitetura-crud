@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { NotFoundInterceptor } from './interceptors/entity-not-found.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,9 @@ async function bootstrap() {
       forbidNonWhitelisted: true, //retorna um erro caso o objeto recebido não tenha os campos declarados
     }),
   );
+
+  //Interceptors
+  app.useGlobalInterceptors(new NotFoundInterceptor());
 
   await app.listen(3000);
 }
